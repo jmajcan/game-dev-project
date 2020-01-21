@@ -6,7 +6,8 @@ public class InputHandler : MonoBehaviour
 {
 
     //This uses input to control the game
-    GameController myGameController;
+    public GameObject player;
+
 
 	//Control Mapping
 	KeyCode upButton = KeyCode.W;
@@ -14,59 +15,120 @@ public class InputHandler : MonoBehaviour
 	KeyCode leftButton = KeyCode.A;
 	KeyCode rightButton = KeyCode.D;
 
-    //Input Variables
-    Vector2 directionalInput;
-
-
     private void Awake() {
-        myGameController = new GameController();
+        player = GameObject.Find("Player");
     }
 
     public void ProcessInput()
     {
         //Process input for up button (W)
         if (Input.GetKeyDown (upButton)) {
-            myGameController.OnUpInputDown ();
+            OnUpInputDown ();
         }
         if (Input.GetKey (upButton)) {
-            myGameController.OnUpInputHold ();
+            OnUpInputHold ();
         }
         if (Input.GetKeyUp (upButton)) {
-            myGameController.OnUpInputUp ();
+            OnUpInputUp ();
         }
 
         //Process input for down button (S)
         if (Input.GetKeyDown (downButton)) {
-            myGameController.OnDownInputDown ();
+           OnDownInputDown ();
         }
         if (Input.GetKey (downButton)) {
-            myGameController.OnDownInputHold ();
+            OnDownInputHold ();
         }
         if (Input.GetKeyUp (downButton)) {
-            myGameController.OnDownInputUp ();
+            OnDownInputUp ();
         }
 
         //Process input for left button (A)
         if (Input.GetKeyDown (leftButton)) {
-            myGameController.OnLeftInputDown ();
+            OnLeftInputDown ();
         }
         if (Input.GetKey (leftButton)) {
-            myGameController.OnLeftInputHold ();
+            OnLeftInputHold ();
         }
         if (Input.GetKeyUp (leftButton)) {
-            myGameController.OnLeftInputUp ();
+            OnLeftInputUp ();
         }
 
         //Process input for right button (D)
         if (Input.GetKeyDown (rightButton)) {
-            myGameController.OnRightInputDown ();
+            OnRightInputDown ();
         }
         if (Input.GetKey (rightButton)) {
-            myGameController.OnRightInputHold ();
+            OnRightInputHold ();
         }
         if (Input.GetKeyUp (rightButton)) {
-            myGameController.OnRightInputUp ();
+            OnRightInputUp ();
         }
+    }
+
+
+//--------------------------------------------------------------------------------------
+// Input Functions
+//--------------------------------------------------------------------------------------
+
+    //---------------------------------------------------------------------------
+    //Up Input
+    //---------------------------------------------------------------------------
+    public void OnUpInputDown () {
+        //TODO: Occurs once when UP input is pressed
+    }
+
+    public void OnUpInputHold () {
+        player.GetComponent<Player>().Move(Vector2.up); //Calls Move method in Player script
+    }
+
+    public void OnUpInputUp () {
+        //TODO: Occurs once when UP input is released
+    }
+
+    //---------------------------------------------------------------------------
+    //Down Input
+    //---------------------------------------------------------------------------
+    public void OnDownInputDown () {
+        //TODO: Occurs once when DOWN input is pressed
+    }
+
+    public void OnDownInputHold () {
+        player.GetComponent<Player>().Move(Vector2.down); //Calls Move method in Player script
+    }
+
+    public void OnDownInputUp () {
+        //TODO: Occurs once when DOWN input is released
+    }
+
+    //---------------------------------------------------------------------------
+    //Left Input
+    //---------------------------------------------------------------------------
+    public void OnLeftInputDown () {
+        //TODO: Occurs once when LEFT input is pressed
+    }
+
+    public void OnLeftInputHold () {
+        player.GetComponent<Player>().Move(Vector2.left); //Calls Move method in Player script
+    }
+
+    public void OnLeftInputUp () {
+        //TODO: Occurs once when LEFT input is released
+    }
+
+    //---------------------------------------------------------------------------
+    //Right Input
+    //---------------------------------------------------------------------------
+    public void OnRightInputDown () {
+        //TODO: Occurs once when RIGHT input is pressed
+    }
+
+    public void OnRightInputHold () {
+        player.GetComponent<Player>().Move(Vector2.right); //Calls Move method in Player script
+    }
+
+    public void OnRightInputUp () {
+        //TODO: Occurs once when RIGHT input is released
     }
 }
 

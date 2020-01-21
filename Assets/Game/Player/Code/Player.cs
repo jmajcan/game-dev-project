@@ -16,4 +16,9 @@ public sealed class Player : MonoBehaviour {
     private void FixedUpdate () {
         myInputHandler.ProcessInput ();
     }
+
+    public void Move (Vector2 direction)
+    {
+        //TODO: Make player move based on input
+    }
 }
