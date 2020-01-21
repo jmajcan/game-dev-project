@@ -18,8 +18,7 @@ public class InputHandler : MonoBehaviour
     Vector2 directionalInput;
 
 
-    public InputHandler()
-    {
+    private void Awake() {
         myGameController = new GameController();
     }
 
