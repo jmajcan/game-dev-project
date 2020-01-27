@@ -37,7 +37,6 @@ public class InputHandler : MonoBehaviour
             OnUpInputDown ();
         }
         if (Input.GetKey (upButton)) {
-            Debug.Log("up held");
             upInput = true;
             OnUpInputHold ();
         } else {
@@ -52,7 +51,6 @@ public class InputHandler : MonoBehaviour
            OnDownInputDown ();
         }
         if (Input.GetKey (downButton)) {
-            Debug.Log("down held");
             downInput = true;
             OnDownInputHold ();
         } else {
@@ -111,7 +109,6 @@ public class InputHandler : MonoBehaviour
     }
 
     public void OnUpInputHold () {
-        Debug.Log("accelerating");
         playerController.Accelerate(1);
     }
 
@@ -127,7 +124,6 @@ public class InputHandler : MonoBehaviour
     }
 
     public void OnDownInputHold () {
-        Debug.Log("reversing");
         playerController.Accelerate(-1);
     }
 
@@ -168,7 +164,6 @@ public class InputHandler : MonoBehaviour
     //---------------------------------------------------------------------------
 
     public void OnNoInputUpDown () {
-        Debug.Log("braking");
         playerController.Accelerate(0);
     }
 }
