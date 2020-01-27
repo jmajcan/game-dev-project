@@ -19,7 +19,6 @@ public sealed class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     private void FixedUpdate () {
-        Debug.Log("Speed: " + myRigidBody.velocity.magnitude/100);
 
         float speed = myRigidBody.velocity.magnitude / 1000;
 
@@ -34,7 +33,6 @@ public sealed class PlayerController : MonoBehaviour {
     //Accelerates the rigidbody2D in the direction given (1 = forward, -1 = reverse, 0 = stop)
     public void Accelerate(int direction){
         float acceleration = horsePower * direction * Time.deltaTime;
-        Debug.Log("acceleration: " + acceleration);
         myRigidBody.AddForce(transform.up * acceleration);
 
         if(direction == 0){
