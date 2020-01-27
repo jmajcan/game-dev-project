@@ -5,8 +5,9 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
 
-    //This uses input to control the game
+    //Things which input controls
     public GameObject player;
+    private PlayerController playerController;
 
 
 	//Control Mapping
@@ -15,8 +16,18 @@ public class InputHandler : MonoBehaviour
 	KeyCode leftButton = KeyCode.A;
 	KeyCode rightButton = KeyCode.D;
 
+    //Input Flags
+    bool upInput = false;
+    bool downInput = false;
+
     private void Awake() {
         player = GameObject.Find("Player");
+        playerController = player.GetComponent<PlayerController>();
+    }
+
+    // Update is called once per frame
+    private void FixedUpdate () {
+        ProcessInput();
     }
 
     public void ProcessInput()
@@ -26,7 +37,11 @@ public class InputHandler : MonoBehaviour
             OnUpInputDown ();
         }
         if (Input.GetKey (upButton)) {
+            Debug.Log("up held");
+            upInput = true;
             OnUpInputHold ();
+        } else {
+            upInput = false;
         }
         if (Input.GetKeyUp (upButton)) {
             OnUpInputUp ();
@@ -37,7 +52,11 @@ public class InputHandler : MonoBehaviour
            OnDownInputDown ();
         }
         if (Input.GetKey (downButton)) {
+            Debug.Log("down held");
+            downInput = true;
             OnDownInputHold ();
+        } else {
+            downInput = false;
         }
         if (Input.GetKeyUp (downButton)) {
             OnDownInputUp ();
@@ -64,6 +83,19 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKeyUp (rightButton)) {
             OnRightInputUp ();
         }
+
+
+        if (!upInput && !downInput){
+            OnNoInputUpDown ();
+        }
+
+        //Set Rotation Point towards mouse and set targetRotation it in player
+        Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = point - player.transform.position;
+        float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rotationAngle = rotationAngle - 90;
+        playerController.SetTargetRotation(Quaternion.Euler(0, 0, rotationAngle));
+
     }
 
 
@@ -79,7 +111,8 @@ public class InputHandler : MonoBehaviour
     }
 
     public void OnUpInputHold () {
-        player.GetComponent<Player>().Move(Vector2.up); //Calls Move method in Player script
+        Debug.Log("accelerating");
+        playerController.Accelerate(1);
     }
 
     public void OnUpInputUp () {
@@ -94,7 +127,8 @@ public class InputHandler : MonoBehaviour
     }
 
     public void OnDownInputHold () {
-        player.GetComponent<Player>().Move(Vector2.down); //Calls Move method in Player script
+        Debug.Log("reversing");
+        playerController.Accelerate(-1);
     }
 
     public void OnDownInputUp () {
@@ -109,7 +143,6 @@ public class InputHandler : MonoBehaviour
     }
 
     public void OnLeftInputHold () {
-        player.GetComponent<Player>().Move(Vector2.left); //Calls Move method in Player script
     }
 
     public void OnLeftInputUp () {
@@ -124,11 +157,19 @@ public class InputHandler : MonoBehaviour
     }
 
     public void OnRightInputHold () {
-        player.GetComponent<Player>().Move(Vector2.right); //Calls Move method in Player script
     }
 
     public void OnRightInputUp () {
         //TODO: Occurs once when RIGHT input is released
+    }
+
+    //---------------------------------------------------------------------------
+    //Absence of Input
+    //---------------------------------------------------------------------------
+
+    public void OnNoInputUpDown () {
+        Debug.Log("braking");
+        playerController.Accelerate(0);
     }
 }
 
