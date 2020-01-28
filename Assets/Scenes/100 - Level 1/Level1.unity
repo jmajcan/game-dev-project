@@ -697,7 +697,7 @@ MonoBehaviour:
   observable: {fileID: 664379425}
   cameraSpeed: 1
   followDampening: 1
-  zoomSpeed: 1
+  zoomMultiplier: 1.3
   targetOrtho: 0
   smoothSpeed: 1
   minOrtho: 7

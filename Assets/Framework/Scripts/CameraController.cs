@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public float followDampening;
 
 
-     public float zoomSpeed = 0.1f;
+     public float zoomMultiplier = 0.1f;
      public float targetOrtho;
      public float smoothSpeed = 2.0f;
      public float minOrtho = 1.0f;
@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
         
 
         if (observableRB.velocity.magnitude != 0.0f){
-            targetOrtho = observableRB.velocity.magnitude * zoomSpeed;
+            targetOrtho = observableRB.velocity.magnitude * zoomMultiplier;
             targetOrtho = Mathf.Clamp (targetOrtho, minOrtho, maxOrtho);
         }
         Camera.main.orthographicSize = Mathf.MoveTowards (Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
