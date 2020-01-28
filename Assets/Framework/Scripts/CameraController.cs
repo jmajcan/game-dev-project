@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
         transform.position = Vector2.Lerp(transform.position, targetPosition, followDampening*Time.deltaTime);
         
 
-        if(observableRB.velocity.magnitude != 0.0f){
+        if (observableRB.velocity.magnitude != 0.0f){
             targetOrtho = observableRB.velocity.magnitude * zoomSpeed;
             targetOrtho = Mathf.Clamp (targetOrtho, minOrtho, maxOrtho);
         }
